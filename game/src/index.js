@@ -1,3 +1,3 @@
-import { Game } from "./game";
+import { Game } from './game';
 
-console.log("И сейчас работает");
+console.log('Все работает');
