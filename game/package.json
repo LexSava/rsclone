@@ -4,7 +4,9 @@
   "description": "Game RPG",
   "main": "index.js",
   "scripts": {
-    "dist": "webpack-dev-server",
+    "dist": "webpack",
+    "watch": "webpack -w",
+    "server": "webpack-dev-server",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
   },
