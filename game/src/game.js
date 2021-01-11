@@ -1,5 +1,6 @@
 import { Screen } from './screen';
 import { Loading } from './scenes/loading';
+import { Menu } from './scenes/menu';
 
 export class Game {
     constructor({ width = 640, height = 640 } = {}) {
@@ -12,7 +13,8 @@ export class Game {
             tiles: 'img/tiles.png'
         });
         this.scenes = {
-            loading: new Loading(this)
+            loading: new Loading(this),
+            menu: new Menu(this)
         };
         this.currentScene = this.scenes.loading;
         this.currentScene.init();
