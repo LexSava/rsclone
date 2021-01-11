@@ -1,8 +1,8 @@
-import { Game } from './game';
+import { Game } from "./game";
 
 window.onload = () => {
     const elvenScout = new Game();
     elvenScout.run();
-}
+};
 
-console.log('Все работает');
+console.log("И сейчас работает");

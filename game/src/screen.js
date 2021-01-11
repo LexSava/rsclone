@@ -14,7 +14,12 @@ export class Screen {
             return elements[0];
         }
         let canvas = document.createElement('canvas');
-        document.body.hasPointerCapture(canvas);
+        document.body.appendChild(canvas);
         return canvas;
+    }
+
+    fill(color) {
+        this.context.fillStyle = color;
+        this.context.fillRect(0, 0, this.width, this.height);
     }
 }

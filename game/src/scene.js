@@ -1,13 +1,13 @@
 export class Scene {
-    constructor(game){
+    constructor(game) {
         this.game = game;
     }
 
-    init(){
+    init() {
         this.isActive = true;
     }
-    
-    render (time){
 
+    render (time) {
+        
     }
 }
