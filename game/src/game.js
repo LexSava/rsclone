@@ -1,6 +1,7 @@
 import { Screen } from './screen';
 import { Loading } from './scenes/loading';
 import { Menu } from './scenes/menu';
+import { GameLevel } from './scenes/game-level';
 import { Scene } from './scene';
 import { ControlState } from './control-state'
 
@@ -19,7 +20,8 @@ export class Game {
 
         this.scenes = {
             loading: new Loading(this),
-            menu: new Menu(this)
+            menu: new Menu(this),
+            gameLevel: new GameLevel(this)
         };
         this.currentScene = this.scenes.loading;
         this.currentScene.init();
