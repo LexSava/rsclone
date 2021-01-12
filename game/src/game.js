@@ -31,7 +31,8 @@ export class Game {
         switch (status) {
             case Scene.LOADED:
                 return this.scenes.menu;
-
+            case Scene.START_GAME:
+                return this.scenes.gameLevel;
             default:
                 return this.scenes.menu;
         }
