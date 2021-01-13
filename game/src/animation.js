@@ -26,8 +26,10 @@ export class Animation extends Sprite {
     }
 
     run() {
-        this.setFrame(0);
-        this.running = true;
+        if (!this.running) {
+            this.setFrame(0);
+            this.running = true;  
+        }
     }
 
     stop() {
