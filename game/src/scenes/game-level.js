@@ -1,7 +1,7 @@
 import { Scene } from '../scene';
 import { SpriteSheet } from '../sprite-sheet';
 import { CharacterSheet } from '../character-sheet';
-import { Player } from '../Player';
+import { Player } from '../player';
 import { Camera } from '../camera';
 import { Collider } from '../collider';
 import { Orc } from '../orc';

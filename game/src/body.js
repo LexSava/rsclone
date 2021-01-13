@@ -32,12 +32,14 @@ export class Body {
     }
 
     walk(direction) {
+        if(this.isShooting) return;
         this.velocity.setDirection(direction, this.speed);
         this.view = this.animations["walk_" + direction];
         this.view.run();
     }
 
     stand(direction) {
+        if(this.isShooting) return;
         this.velocity.setDirection(direction, 0);
         this.view = this.animations["walk_" + direction];
         this.view.stop();
