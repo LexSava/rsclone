@@ -10,8 +10,13 @@ export class Screen {
         this.context = this.canvas.getContext('2d');
         this.images = {};
         this.isImagesLoaded = false;
+        this.camera = null;
+        this.isCameraSet = false;
     }
-
+    setCamera(camera) {
+        this.camera = camera;
+        this.isCameraSet = true;
+    }
     loadImages(imageFiles) {
         const loader = new ImageLoader(imageFiles);
         loader.load().then((names) => {
