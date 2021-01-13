@@ -28,6 +28,36 @@ export class Screen {
         return canvas;
     }
 
+    createMap(name, mapData, tileset) {
+        const mapImage = document.createElement('canvas');
+        mapImage.width = mapData.width * mapData.tilewidth;
+        mapImage.height = mapData.height * mapData.tileheight;
+        const mapContext = mapImage.getContext('2d');
+        const hitboxes = [];
+        let row, col;
+        mapData.layers.forEach(layer => {
+            if (layer.type == 'tilelayer') {
+                row = 0;
+                col = 0;
+                layer.data.forEach(index => {
+                    if (index > 0) {
+                        mapContext.drawImage(this.images[tileset.imageName],
+                            tileset.getSourceX(index), tileset.getSourceY(index),
+                            mapData.tilewidth, mapData.tileheight,
+                            col * mapData.tilewidth, row * mapData.tileheight,
+                            mapData.tilewidth, mapData.tileheight
+                        );
+                    }
+                    col++;
+                    if (col > (mapData.width - 1)) {
+                        col = 0;
+                        row++;
+                    }
+                })
+            }
+        })
+    }
+
     fill(color) {
         this.context.fillStyle = color;
         this.context.fillRect(0, 0, this.width, this.height);
