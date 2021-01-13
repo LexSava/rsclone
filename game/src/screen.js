@@ -53,9 +53,21 @@ export class Screen {
                         col = 0;
                         row++;
                     }
-                })
+                });
             }
-        })
+            if (layer.type == "objectgroup") {
+                hitboxes.push(...layer.objects.map(obj => ({ x1: obj.x, x2: obj.x + obj.width, y1: obj.y, y2: obj.y + obj.height })));
+            }
+        });
+        this.images[name] = mapImage;
+        return new TileMap({
+            imageName: name,
+            sourceX: 0,
+            sourceY: 0,
+            width: mapImage.width,
+            height: mapImage.height,
+            hitboxes: hitboxes
+        });
     }
 
     fill(color) {
