@@ -92,8 +92,37 @@ export class Screen {
     }
 
     drawSprite(sprite) {
+
+        let spriteX = sprite.x;
+        let spriteY = sprite.y;
+
+        if (this.isCameraSet) {
+            spriteX -= this.camera.x;
+            spriteY -= this.camera.y;
+        }
+
+        if (
+            (spriteX >= this.width) ||
+            (spriteY >= this.height) ||
+            ((spriteX + sprite.width) <= 0) ||
+            ((spriteY + sprite.height) <= 0)
+        ) {
+            return;
+        }
+
+        let sourceX = sprite.sourceX + Math.abs(Math.min(0, spriteX));
+        let sourceY = sprite.sourceY + Math.abs(Math.min(0, spriteY));
+        let width = Math.min(this.width, spriteX + sprite.width) - Math.max(0, spriteX);
+        let height = Math.min(this.height, spriteY + sprite.height) - Math.max(0, spriteY);
+
         this.context.drawImage(this.images[sprite.imageName],
-            sprite.sourceX, sprite.sourceY, sprite.width, sprite.height,
-            sprite.x, sprite.y, sprite.width, sprite.height);
+            sourceX,
+            sourceY,
+            width,
+            height,
+            Math.max(0, spriteX),
+            Math.max(0, spriteY),
+            width,
+            height);
     }
 }
