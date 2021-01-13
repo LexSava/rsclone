@@ -17,6 +17,7 @@ export class GameLevel extends Scene {
             imageHeight: 1344
         });
         this.orc = this.orcTiles.getAnimation([1, 2, 3, 4, 5, 6, 7], 300);
+        this.orc.setXY(100, 10);
     }
 
     init() {
