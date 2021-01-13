@@ -8,23 +8,28 @@ export class Vector {
         this.speed = speed;
         this.x = 0;
         this.y = 0;
-        switch(direction) {
+        switch (direction) {
             case "up":
                 this.y = -speed;
-            break;
+                break;
 
             case "down":
                 this.y = speed;
-            break;
+                break;
 
             case "right":
                 this.x = speed;
-            break;
+                break;
 
             case "left":
                 this.x = -speed;
-            break;
-            
+                break;
+
         }
+    }
+
+    move(object, dt) {
+        object.x += dt * (this.x / 1000);
+        object.y += dt * (this.y / 1000);
     }
 }
