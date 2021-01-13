@@ -22,24 +22,27 @@ export class Body {
         this.stand("down");
     }
 
-    shoot() {
+    shoot(arrow) {
         if (!this.isShooting) {
             this.isShooting = true;
             this.view = this.animations["shoot_" + this.velocity.direction];
-            this.view.onEnd = () => this.isShooting = false;
+            this.view.onEnd = () => {
+                this.isShooting = false;
+                arrow.fly(this.x, this.y, this.velocity.direction);
+            }
             this.view.run();
         }
     }
 
     walk(direction) {
-        if(this.isShooting) return;
+        if (this.isShooting) return;
         this.velocity.setDirection(direction, this.speed);
         this.view = this.animations["walk_" + direction];
         this.view.run();
     }
 
     stand(direction) {
-        if(this.isShooting) return;
+        if (this.isShooting) return;
         this.velocity.setDirection(direction, 0);
         this.view = this.animations["walk_" + direction];
         this.view.stop();
