@@ -1,5 +1,6 @@
 import { Scene } from '../scene';
 import { SpriteSheet } from '../sprite-sheet';
+import { CharacterSheet } from '../character-sheet';
 
 export class GameLevel extends Scene {
     constructor(game) {
@@ -11,24 +12,21 @@ export class GameLevel extends Scene {
         });
         this.tree = this.tiles.getSprite(7);
         this.tree.setXY(10, 10);
-        this.orcTiles = new SpriteSheet({
-            imageName: 'orc',
-            imageWidth: 832,
-            imageHeight: 1344
-        });
-        this.orc = this.orcTiles.getAnimation([1, 2, 3, 4, 5, 6, 7], 300);
+        this.orcTiles = new CharacterSheet({ imageName: "orc" });
+        this.orc = this.orcTiles.getAnimation("stab_down");
         this.orc.setXY(100, 10);
     }
 
     init() {
         super.init();
         const mapData = require('../maps/level1.json');
-        this.map = this.game.screen.createMap('level1', mapData, this.tiles);
+        this.map = this.game.screen.createMap("level1", mapData, this.tiles);
     }
 
     update(time) {
         this.orc.update(time);
     }
+
     render(time) {
         this.update(time);
         this.game.screen.fill('#000000');
