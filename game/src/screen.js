@@ -1,4 +1,6 @@
 import { ImageLoader } from './image-loader';
+import { TileMap } from './tite-map';
+
 
 export class Screen {
     constructor(width, height) {
