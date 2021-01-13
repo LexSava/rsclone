@@ -2,15 +2,16 @@ import { Vector } from "./vector";
 import { CharacterSheet } from "./character-sheet";
 
 export class Body {
-    constructor({imageName, speed}) {
+    constructor({ imageName, speed }) {
         this.x = 0;
         this.y = 0;
         this.speed = speed;
         this.velocity = new Vector("down", 0);
         this.lastTime = 0;
         this.animations = {};
+        this.collisionShape = { x: 18, y: 15, width: 28, height: 49 };
 
-        const animationSheet = new CharacterSheet({imageName: imageName});
+        const animationSheet = new CharacterSheet({ imageName: imageName });
         "walk_down,walk_up,walk_left,walk_right".split(",").forEach(name => {
             this.animations[name] = animationSheet.getAnimation(name);
         });
@@ -30,7 +31,7 @@ export class Body {
     }
 
     update(time) {
-        if(this.lastTime == 0) {
+        if (this.lastTime == 0) {
             this.lastTime = time;
             return;
         }
@@ -38,7 +39,7 @@ export class Body {
         this.x += (time - this.lastTime) * (this.velocity.x / 1000);
         this.y += (time - this.lastTime) * (this.velocity.y / 1000);
         this.lastTime = time;
-        this.view.setXY(Math.trunc(this.x),Math.trunc(this.y));
+        this.view.setXY(Math.trunc(this.x), Math.trunc(this.y));
         this.view.update(time);
     }
 } 
