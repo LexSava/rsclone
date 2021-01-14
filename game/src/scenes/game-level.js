@@ -46,6 +46,7 @@ export class GameLevel extends Scene {
         this.collider.addStaticShapes(mapData);
         this.collider.addKinematicBody(this.player);
         this.collider.addKinematicBody(this.orc);
+        //this.collider.addKinematicBody(this.arrow);
     }
 
     update(time) {
@@ -68,4 +69,5 @@ export class GameLevel extends Scene {
         }
         super.render(time);
     }
+
 }

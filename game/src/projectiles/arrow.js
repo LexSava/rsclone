@@ -6,6 +6,7 @@ export class Arrow extends Projectile {
     constructor(direction, speed) {
         super(direction, speed);
         this.sprites = {};
+        this.name = 'arrow';
         const tiles = new SpriteSheet({
             imageName: 'tiles',
             imageWidth: 640,

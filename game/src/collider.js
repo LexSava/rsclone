@@ -10,6 +10,11 @@ export class Collider {
                 this.staticShapes.push(...layer.objects);
             }
         });
+        //Добавим ограничение по краям карты. За карту нельзя выйти
+        this.staticShapes.push({ x: 0, y: 0, width: 1300, height: 1 });
+        this.staticShapes.push({ x: 0, y: 0, width: 1, height: 1300 });
+        // this.staticShapes.push({x:1280,y:0,width:1,height:1300});
+        this.staticShapes.push({ x: 1280, y: 0, width: 1300, height: 1 });
     }
 
     addKinematicBody(body) {
