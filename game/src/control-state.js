@@ -10,7 +10,8 @@ export class ControlState {
             [39, 'right'],
             [38, 'up'],
             [40, 'down'],
-            [32, 'fire']
+            [32, 'fire'],
+            [13, 'enter']
         ]);
         document.addEventListener('keydown', (event) => this.update(event, true));
         document.addEventListener('keyup', (event) => this.update(event, false));
