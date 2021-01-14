@@ -9,7 +9,7 @@ export class Menu extends Scene {
     }
 
     update(time) {
-        if (this.game.control.fire) {
+        if (this.game.control.enter) {
             this.finish(Scene.START_GAME);
         }
     }
@@ -17,7 +17,7 @@ export class Menu extends Scene {
     render(time) {
         this.update(time);
         this.game.screen.drawImage(0, 0, 'title');
-        this.game.screen.print(250, 500, 'Нажмите пробел');
+        this.game.screen.print(250, 500, 'Нажмите Enter');
         super.render(time);
     }
 }

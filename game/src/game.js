@@ -11,7 +11,7 @@ export class Game {
         this.screen = new Screen(width, height);
         this.screen.loadImages({
             orc: 'img/orc.png',
-            player: 'img/player.png',
+            player: 'img/player2.png',
             title: 'img/title.jpg',
             tiles: 'img/tiles.png'
         });

@@ -1,6 +1,7 @@
 import { Projectile } from "../projectile";
 import { SpriteSheet } from "../sprite-sheet";
 
+
 export class Arrow extends Projectile {
     constructor(direction, speed) {
         super(direction, speed);
