@@ -1,23 +1,27 @@
-import { Scene } from "../scene";
+import { Scene } from '../scene';
 
 export class Menu extends Scene {
-    constructor(game) {
-        super(game);
-    }
-    init() {
-        super.init();
-    }
+  constructor(game) {
+    super(game);
+  }
 
-    update(time) {
-        if (this.game.control.enter) {
-            this.finish(Scene.START_GAME);
-        }
-    }
+  init() {
+    super.init();
+  }
 
-    render(time) {
-        this.update(time);
-        this.game.screen.drawImage(0, 0, 'title');
-        this.game.screen.print(250, 500, 'Нажмите Enter');
-        super.render(time);
+  update(time) {
+    if (this.game.control.enter) {
+      this.finish(Scene.START_GAME);
     }
+  }
+
+  render(time) {
+    this.update(time);
+    this.game.screen.drawImage(0, 0, 'title_bg');
+    this.game.screen.drawImage(0, 0, 'title_name');
+    this.game.screen.drawImage(0, 0, 'title_start');
+    this.game.screen.drawImage(0, 0, 'title_option');
+    this.game.screen.drawImage(0, 0, 'title_exit');
+    super.render(time);
+  }
 }

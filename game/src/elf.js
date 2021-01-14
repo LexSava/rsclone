@@ -1,9 +1,9 @@
 import { Body } from './body';
 import { Dummy } from './ais/dummy';
 
-export class Orc extends Body {
+export class Elf extends Body {
   constructor() {
-    super({ imageName: 'orc', speed: 50 });
+    super({ imageName: 'elf', speed: 60 });
     this.ai = new Dummy();
     this.ai.control(this);
   }
