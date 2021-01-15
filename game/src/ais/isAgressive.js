@@ -1,16 +1,16 @@
-export class isAgressive{
-    constructor(){
-    }
+export class isAgressive {
+  constructor() {
+  }
 
-    static becomeAgressive(){
-        this.agressive = true;
-    }
+  static becomeAgressive() {
+    this.agressive = true;
+  }
 
-    static becomePeaceful(){
-        this.agressive = false;
-    }
+  static becomePeaceful() {
+    this.agressive = false;
+  }
 
-    static isOrcAgressive(){
-        return this.agressive;
-    }
+  static isOrcAgressive() {
+    return this.agressive;
+  }
 }

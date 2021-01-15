@@ -1,5 +1,5 @@
-import { Projectile } from "../projectile";
-import { SpriteSheet } from "../sprite-sheet";
+import { Projectile } from '../projectile';
+import { SpriteSheet } from '../sprite-sheet';
 
 export class Arrow extends Projectile {
   constructor(direction, speed, x, y) {
@@ -9,12 +9,12 @@ export class Arrow extends Projectile {
     const tiles = new SpriteSheet({
       imageName: 'tiles',
       imageWidth: 640,
-      imageHeight: 640
+      imageHeight: 640,
     });
-    this.sprites['left'] = tiles.getSprite(36);
-    this.sprites['right'] = tiles.getSprite(37);
-    this.sprites['down'] = tiles.getSprite(46);
-    this.sprites['up'] = tiles.getSprite(47);
+    this.sprites.left = tiles.getSprite(36);
+    this.sprites.right = tiles.getSprite(37);
+    this.sprites.down = tiles.getSprite(46);
+    this.sprites.up = tiles.getSprite(47);
     this.view = this.sprites[direction];
   }
 
