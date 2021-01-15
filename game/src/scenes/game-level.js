@@ -9,6 +9,8 @@ import { Elf } from '../elf';
 import { Arrow } from '../projectiles/arrow';
 import { RemoveFromArray } from '../remove-from-array'
 import { isAgressive } from '../ais/isAgressive';
+import { Interface } from '../interface';
+
 export class GameLevel extends Scene {
   constructor(game) {
     super(game);
@@ -63,7 +65,7 @@ export class GameLevel extends Scene {
     this.collider.addKinematicBody(this.orc);
     this.collider.addKinematicBody(this.elf);
 
-
+    this.interface = new Interface(this.game, this.waves);
     this.projectiles = [];
   }
 
@@ -106,6 +108,7 @@ export class GameLevel extends Scene {
         }
       });
     }
+    this.interface.update(time);
     super.render(time);
   }
   shooting() {//Стрельба игрока
