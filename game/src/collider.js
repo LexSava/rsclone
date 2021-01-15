@@ -66,21 +66,27 @@ export class Collider {
                 })
 
                 //Коллизия персонажей между собой
-                // for(let j=0; j<this.bodies.length;j++){
-                //     let shape = this.bodies[j];
-                //     if(body != shape){//Если это не тот же самый объект
-                //         if(((oldX - 1 + body.obj.collisionShape.x + body.obj.collisionShape.width) < shape.obj.x + shape.obj.collisionShape.x) &&
-                //             ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x) &&
-                //             ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)) &&
-                //             ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
-                //         ){
-                //             x = Math.min(x + body.obj.collisionShape.x + body.obj.collisionShape.width, shape.obj.x + shape.obj.collisionShape.x)
-                //                         - body.obj.collisionShape.x - body.obj.collisionShape.width;
-                //             this.checkInteractive(body,shape,i,j);//Проверяем интерактив (например стрела бьёт орка, орк бьёт игрока и т.д.)
-                //         }
-                //     }
-                // }
+                for (let j = 0; j < this.bodies.length; j++) {
+                    let shape = this.bodies[j];
+                    if (body != shape) {//Если это не тот же самый объект
+                        if (((oldX - 1 + body.obj.collisionShape.x + body.obj.collisionShape.width) < shape.obj.x + shape.obj.collisionShape.x) &&
+                            ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x) &&
+                            ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)) &&
+                            ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
+                        ) {
+                            x = Math.min(x + body.obj.collisionShape.x + body.obj.collisionShape.width, shape.obj.x + shape.obj.collisionShape.x)
+                                - body.obj.collisionShape.x - body.obj.collisionShape.width;
+                            this.checkInteractive(body, shape, i, j);//Проверяем интерактив (например стрела бьёт орка, орк бьёт игрока и т.д.)
+                        }
+                    }
+                }
             }
+
+
+
+
+
+
 
 
             if (x < oldX) {//moving left
@@ -95,20 +101,20 @@ export class Collider {
                     }
                 });
 
-                // //Коллизия персонажей между собой
-                // for(let j=0; j<this.bodies.length;j++){
-                //     let shape = this.bodies[j];
-                //     if(body != shape){//Если это не тот же самый объект
-                //         if(((oldX + 1 + body.obj.collisionShape.x) > shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width) &&
-                //             ((x + body.obj.collisionShape.x) < shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width) &&
-                //             ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)) &&
-                //             ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
-                //         ){
-                //             x = Math.max(x + body.obj.collisionShape.x, shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)- body.obj.collisionShape.x;
-                //             this.checkInteractive(body,shape,i,j);
-                //         }
-                //     }
-                // }
+                //Коллизия персонажей между собой
+                for (let j = 0; j < this.bodies.length; j++) {
+                    let shape = this.bodies[j];
+                    if (body != shape) {//Если это не тот же самый объект
+                        if (((oldX + 1 + body.obj.collisionShape.x) > shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width) &&
+                            ((x + body.obj.collisionShape.x) < shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width) &&
+                            ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)) &&
+                            ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
+                        ) {
+                            x = Math.max(x + body.obj.collisionShape.x, shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width) - body.obj.collisionShape.x;
+                            this.checkInteractive(body, shape, i, j);
+                        }
+                    }
+                }
             }
 
 
@@ -127,21 +133,21 @@ export class Collider {
                     }
                 });
 
-                // //Коллизия персонажей между собой
-                // for(let j=0; j<this.bodies.length;j++){
-                //     let shape = this.bodies[j];
-                //     if(body != shape){//Если это не тот же самый объект
-                //         if(((oldY - 1 + body.obj.collisionShape.y + body.obj.collisionShape.height) < shape.obj.y + shape.obj.collisionShape.y) &&
-                //             ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y) &&
-                //             ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)) &&
-                //             ((x + body.obj.collisionShape.x + body.obj.collisionShape.height) > shape.obj.x + shape.obj.collisionShape.x)
-                //         ){
-                //             y = Math.min(y + body.obj.collisionShape.y + body.obj.collisionShape.height, shape.obj.y + shape.obj.collisionShape.y)
-                //                         - body.obj.collisionShape.y - body.obj.collisionShape.height;
-                //             this.checkInteractive(body,shape,i,j);
-                //         }
-                //     }
-                // }
+                //Коллизия персонажей между собой
+                for (let j = 0; j < this.bodies.length; j++) {
+                    let shape = this.bodies[j];
+                    if (body != shape) {//Если это не тот же самый объект
+                        if (((oldY - 1 + body.obj.collisionShape.y + body.obj.collisionShape.height) < shape.obj.y + shape.obj.collisionShape.y) &&
+                            ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y) &&
+                            ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)) &&
+                            ((x + body.obj.collisionShape.x + body.obj.collisionShape.height) > shape.obj.x + shape.obj.collisionShape.x)
+                        ) {
+                            y = Math.min(y + body.obj.collisionShape.y + body.obj.collisionShape.height, shape.obj.y + shape.obj.collisionShape.y)
+                                - body.obj.collisionShape.y - body.obj.collisionShape.height;
+                            this.checkInteractive(body, shape, i, j);
+                        }
+                    }
+                }
             }
 
 
@@ -161,19 +167,19 @@ export class Collider {
                     }
                 })
 
-                // for(let j=0; j<this.bodies.length;j++){
-                //     let shape = this.bodies[j];
-                //     if(body != shape){//Если это не тот же самый объект
-                //         if(((oldY + 1 + body.obj.collisionShape.y) > shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height) &&
-                //             ((y + body.obj.collisionShape.y) < shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height) &&
-                //             ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)) &&
-                //             ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x)
-                //         ){
-                //             y = Math.max(y + body.obj.collisionShape.y, shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)- body.obj.collisionShape.y;
-                //             this.checkInteractive(body,shape,i,j);
-                //         }
-                //     }
-                // }
+                for (let j = 0; j < this.bodies.length; j++) {
+                    let shape = this.bodies[j];
+                    if (body != shape) {//Если это не тот же самый объект
+                        if (((oldY + 1 + body.obj.collisionShape.y) > shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height) &&
+                            ((y + body.obj.collisionShape.y) < shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height) &&
+                            ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)) &&
+                            ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x)
+                        ) {
+                            y = Math.max(y + body.obj.collisionShape.y, shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height) - body.obj.collisionShape.y;
+                            this.checkInteractive(body, shape, i, j);
+                        }
+                    }
+                }
             }
 
             body.x = x;
@@ -182,6 +188,10 @@ export class Collider {
             body.obj.y = y;
         }//this.bodies cycle
     }//checkStatic
+
+
+
+
 
     checkInteractive(body, shape, indexOfBody, indexOfShape) {
         if (body.obj.hasOwnProperty('name') && shape.obj.hasOwnProperty('name')) {//Проверка на случай, если попадётся объект без названия
@@ -197,6 +207,9 @@ export class Collider {
             // }
         }
     }//checkInteractive
+
+
+
 
 
     checkInteractiveWithStatic(body, indexOfBody) {//

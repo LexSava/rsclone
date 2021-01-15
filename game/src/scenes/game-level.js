@@ -8,7 +8,7 @@ import { Orc } from '../orc';
 import { Elf } from '../elf';
 import { Arrow } from '../projectiles/arrow';
 import { RemoveFromArray } from '../remove-from-array'
-
+import { isAgressive } from '../ais/isAgressive';
 export class GameLevel extends Scene {
   constructor(game) {
     super(game);
@@ -38,7 +38,7 @@ export class GameLevel extends Scene {
 
   init() {
     super.init();
-
+    isAgressive.becomePeaceful();
     this.player = new Player(this.game.control, this);
     this.player.x = 100;
     this.player.y = 100;

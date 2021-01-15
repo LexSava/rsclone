@@ -5,7 +5,7 @@ export class Arrow extends Projectile {
   constructor(direction, speed, x, y) {
     super(direction, speed, x, y);
     this.sprites = {};
-    this.name = 'arrow';//Для коллайдера, что опознать этот объект
+    this.name = 'arrow';
     const tiles = new SpriteSheet({
       imageName: 'tiles',
       imageWidth: 640,
@@ -15,7 +15,7 @@ export class Arrow extends Projectile {
     this.sprites['right'] = tiles.getSprite(37);
     this.sprites['down'] = tiles.getSprite(46);
     this.sprites['up'] = tiles.getSprite(47);
-    this.view = this.sprites[direction];//Какой спрайт стрелы отобразить зависит от направления персонажа
+    this.view = this.sprites[direction];
   }
 
   fly(x, y, direction) {
