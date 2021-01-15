@@ -2,7 +2,7 @@ import { Body } from "./body";
 
 export class Player extends Body { //Player -> Body ~ CharacterSheet -> SpriteSheet ~ Sprite
   constructor(control, game_level) {//control - управление клавиатурой
-    super({ imageName: 'player', speed: 150 });
+    super({ imageName: 'player', speed: 100 });
     this.control = control;
     this.game_level = game_level;
     this.arrow = false;//Позволяем стрелять только если на руках есть стрела
@@ -24,13 +24,13 @@ export class Player extends Body { //Player -> Body ~ CharacterSheet -> SpriteSh
     this.arrow = arrow;
   }
 
-  getHit() {//Игрок получил удар
-    if (this.timerUndead === -1) {//Если игрок смертен
-      if (this.health > 0)
-        this.health -= 1;
-      this.timerUndead = this.undead;//Делаем игрока бессмертным на время
-    }
-  }
+  // getHit() {//Игрок получил удар
+  //   if (this.timerUndead === -1) {//Если игрок смертен
+  //     if (this.health > 0)
+  //       this.health -= 1;
+  //     this.timerUndead = this.undead;//Делаем игрока бессмертным на время
+  //   }
+  // }
 
   update(time) {
     if (this.lastTimeForArrow === 0) {
