@@ -37,4 +37,8 @@ export class Camera {
       }
     }
   }
+  specialPosition() {
+    this.x = this.width;
+    this.y = this.height;
+  }
 }
