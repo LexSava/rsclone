@@ -2,8 +2,8 @@ import { Projectile } from '../projectile';
 import { SpriteSheet } from '../sprite-sheet';
 
 export class Arrow extends Projectile {
-  constructor(direction, speed) {
-    super(direction, speed);
+  constructor(direction, speed, x, y) {
+    super(direction, speed, x, y);
     this.sprites = {};
     this.name = 'arrow';
     const tiles = new SpriteSheet({
