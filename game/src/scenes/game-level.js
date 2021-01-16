@@ -1,15 +1,13 @@
 import { Scene } from '../scene';
 import { SpriteSheet } from '../sprite-sheet';
-import { CharacterSheet } from '../character-sheet';
 import { Player } from '../player';
 import { Camera } from '../camera';
 import { Collider } from '../collider';
-import { Orc } from '../orc';
-import { Elf } from '../elf';
 import { Arrow } from '../projectiles/arrow';
+import { Waves } from '../waves';
+import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
-// import { Interface } from '../interface';
 
 export class GameLevel extends Scene {
   constructor(game) {
@@ -17,58 +15,65 @@ export class GameLevel extends Scene {
     this.tiles = new SpriteSheet({
       imageName: 'tiles',
       imageWidth: 640,
-      imageHeight: 640,
+      imageHeight: 640
     });
-
-    this.orc = new Orc();
-    this.orc.x = 500;
-    this.orc.y = 300;
-
-    this.elf = new Elf();
-    this.elf.x = 310;
-    this.elf.y = 110;
   }
 
   init() {
     super.init();
-    isAgressive.becomePeaceful();
+
+    isAgressive.becomePeaceful();//Сделать орков мирными
+
     this.player = new Player(this.game.control, this);
     this.player.x = 100;
     this.player.y = 100;
 
-    this.collider = new Collider();
+    this.collider = new Collider();//Учитывает взаимодействие между объектами, например, не даёт проходить объектам сквозь друг друга
 
+    //Используем webpack поэтому загрузчик json файлов работает по умолчанию
     const mapData = require('../maps/level1.json');
-    this.map = this.game.screen.createMap('level1', mapData, this.tiles);
-
+    this.map = this.game.screen.createMap('level1', mapData, this.tiles);//createMap возвращает объект TileMap
     this.mainCamera = new Camera({
       width: this.game.screen.width,
       height: this.game.screen.height,
       limitX: this.map.width - this.game.screen.width,
-      limitY: this.map.height - this.game.screen.height,
+      limitY: this.map.height - this.game.screen.height
     });
-    this.mainCamera.specialPosition();
+    this.mainCamera.specialPosition();//Загнать камеру в самый угол
     this.mainCamera.watch(this.player);
     this.game.screen.setCamera(this.mainCamera);
 
     this.collider.addStaticShapes(mapData);
     this.collider.addKinematicBody(this.player);
-    this.collider.addKinematicBody(this.orc);
-    this.collider.addKinematicBody(this.elf);
 
-    this.projectiles = [];
+    this.orcArmy = [];//Массив орков, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
+    this.waves = new Waves(this.game);//Контролирует появление противников
+    this.waves.init();
+
+    // this.textInfo = new TextInfo(this.game.screen);//Выскакивающие текстовые надписи, например "Wave#1"
+    this.interface = new Interface(this.game, this.waves);//Шкала здоровья, таймер в углу экрана
+    this.projectiles = [];//Массив стрел, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
+    this.gameOverTrigger = false;//Если interface сделает эту переменную true, переходим к проигрышной сцене
+    this.winTrigger = false;//Если interface сделает эту переменную true, переходим к победной сцене
+
+
   }
 
   update(time) {
-    this.orc.update(time);
-    this.elf.update(time);
+    if (this.gameOverTrigger) {//Закончим игру
+      this.finish(Scene.GAME_OVER);
+    }
+
+    if (this.winTrigger) {//Закончим игру
+      this.finish(Scene.GAME_WIN);
+    }
+
+    // this.orc.update(time);
     this.player.update(time);
-    this.collider.update(time);
-    this.mainCamera.update(time);
 
     if (this.projectiles.length > 0) {
       this.projectiles.forEach((arrow, index) => {
-        if (arrow.active) { // active становится true в методе Player -> Body.shoot()
+        if (arrow.active) {//active становится true в методе Player -> Body.shoot()
           arrow.update(time);
         }
         if (arrow.deleted) {
@@ -76,30 +81,53 @@ export class GameLevel extends Scene {
         }
       });
     }
+
+    if (this.orcArmy.length > 0) {
+
+      this.orcArmy.forEach(orc => {
+        orc.update(time);
+
+      });
+
+    }
+
+
+
+    this.collider.update(time);
+    this.mainCamera.update(time);
   }
 
   render(time) {
     this.update(time);
     this.game.screen.fill('#000000');
     this.game.screen.drawSprite(this.map);
-    this.game.screen.drawSprite(this.orc.view);
-    this.game.screen.drawSprite(this.elf.view);
+
+    if (this.orcArmy.length > 0) {
+      this.orcArmy.forEach(orc => {
+        this.game.screen.drawSprite(orc.view);
+      });
+    }
+
     this.game.screen.drawSprite(this.player.view);
 
-    if (this.projectiles.length > 0) { // Отрисовка стрел
-      this.projectiles.forEach((arrow) => {
-        if (arrow.active) { // active становится true в методе Player -> Body.shoot()
+    if (this.projectiles.length > 0) {//Отрисовка стрел
+      this.projectiles.forEach(arrow => {
+        if (arrow.active) {//active становится true в методе Player -> Body.shoot()
           this.game.screen.drawSprite(arrow.view);
         }
       });
     }
+
+    this.waves.update(time);
     super.render(time);
+    this.interface.update(time);
   }
 
-  shooting() { // Стрельба игрока
-    const arrow = new Arrow('down', 400, this.player.x, this.player.y);
+  shooting() {//Стрельба игрока
+    let arrow = new Arrow('down', 400, this.player.x, this.player.y);
     this.player.addArrow(arrow);
-    this.projectiles.push(arrow);// Все объекты из этого массива будут отрисованы в методе render
+    this.projectiles.push(arrow);//Все объекты из этого массива будут отрисованы в методе render
     this.collider.addKinematicBody(arrow);
   }
+
 }
