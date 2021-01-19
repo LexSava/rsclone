@@ -1,8 +1,12 @@
 import { Scene } from '../scene';
 
+import { menuPlayAudio } from '../audio-playback/audios';
+
+
 export class Menu extends Scene {
   constructor(game) {
     super(game);
+    menuPlayAudio();
   }
 
   init() {

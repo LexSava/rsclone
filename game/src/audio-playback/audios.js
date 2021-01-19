@@ -8,6 +8,11 @@ export function arrowPlayAudio() {
 export function swordPlayAudio() {
     let sound = new Audio();
     sound.src = 'audio/sword.mp3';
+    return sound.play();
+}
 
+export function menuPlayAudio() {
+    let sound = new Audio();
+    sound.src = 'audio/menu.mp3';
     return sound.play();
 }
