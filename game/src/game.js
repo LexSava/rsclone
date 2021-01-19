@@ -4,6 +4,7 @@ import { Menu } from './scenes/menu';
 import { GameLevel } from './scenes/game-level';
 import { Scene } from './scene';
 import { ControlState } from './control-state';
+import { GameOver } from './scenes/game-over';
 
 export class Game {
   constructor({ width = 640, height = 640 } = {}) {
@@ -26,6 +27,7 @@ export class Game {
       loading: new Loading(this),
       menu: new Menu(this),
       gameLevel: new GameLevel(this),
+      gameOver: new GameOver(this),
     };
     this.currentScene = this.scenes.loading;
     this.currentScene.init();
@@ -37,6 +39,8 @@ export class Game {
         return this.scenes.menu;
       case Scene.START_GAME:
         return this.scenes.gameLevel;
+      case Scene.GAME_OVER:
+        return this.scenes.gameOver;
       default:
         return this.scenes.menu;
     }

@@ -23,7 +23,7 @@ export class Loading extends Scene {
   render(time) {
     this.update(time);
     this.game.screen.fill('#000000');
-    this.game.screen.print(50, 70, 'Загрузка...');
+    this.game.screen.print(50, 70, 'Loading...');
     super.render(time);
   }
 }
