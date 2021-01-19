@@ -8,7 +8,7 @@ import { Waves } from '../waves';
 import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
-import { arrowPlayAudio } from '../audio-playback/arrow';
+import { arrowPlayAudio } from '../audio-playback/audios';
 
 export class GameLevel extends Scene {
   constructor(game) {

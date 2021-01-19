@@ -1,4 +1,6 @@
 import { Body } from './body';
+import { swordPlayAudio } from './audio-playback/audios';
+
 
 export class Player extends Body { // Player -> Body ~ CharacterSheet -> SpriteSheet ~ Sprite
   constructor(control, game_level) { // control - управление клавиатурой
@@ -25,6 +27,7 @@ export class Player extends Body { // Player -> Body ~ CharacterSheet -> SpriteS
   }
 
   getHit() { // Игрок получил удар
+    swordPlayAudio();
     if (this.timerUndead === -1) { // Если игрок смертен
       if (this.health > 0) this.health -= 1;
       this.timerUndead = this.undead;// Делаем игрока бессмертным на время
