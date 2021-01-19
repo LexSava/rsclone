@@ -6,7 +6,7 @@ export class TextInfo{
         this.showTextBoolean = false;//Показывать ли текст
         this.text = '';
         this.lastTime = 0;
-        this.howLongToShow = 1000;//Сколько времени показывать текст
+        this.howLongToShow = 5000;//Сколько времени показывать текст
         this.timeToStop = 0;//Время когда нужно завершить показ
         this.fontSize = 0;
         this.startFontSize = 150;

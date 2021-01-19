@@ -11,7 +11,7 @@ export class Player extends Body { //Player -> Body ~ CharacterSheet -> SpriteSh
     this.lastTimeForArrow = 0;
     this.name = 'player';//Для коллайдера, что опознать этот объект
 
-    this.healthStart = 100;//Начальное количество жизней
+    this.healthStart = 20;//Начальное количество жизней
     this.health = this.healthStart;
 
     this.undead = 1000;//Константа времени бессмертия, после получения урона игрок бессмертен

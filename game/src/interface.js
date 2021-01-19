@@ -1,4 +1,5 @@
 import { TextInfo } from "./text-info";
+import { isAgressive } from './ais/isAgressive';
 
 export class Interface {
     constructor(game, waves) {
@@ -29,20 +30,20 @@ export class Interface {
         }
 
 
-        // if (isAgressive.isOrcAgressive()) {
-        //     this.fightText(time);
-        // } else {
-        //     this.showTimer();//Обратный отсчёт
-        //     this.timeToSurvive -= time - this.lastTime;
-        //     if (this.timeToSurvive < 0) {
-        //         this.timeToSurvive = 0;
-        //         this.endGame(time, 'win');
-        //     }
-        // }
+        if (isAgressive.isOrcAgressive()) {
+            this.fightText(time);
+        } else {
+            // this.showTimer();//Обратный отсчёт
+            this.timeToSurvive -= time - this.lastTime;
+            if (this.timeToSurvive < 0) {
+                this.timeToSurvive = 0;
+                this.endGame(time, 'win');
+            }
+        }
 
-        // this.textInfo.update(time);
+        this.textInfo.update(time);
 
-        // this.lastTime = time;
+        this.lastTime = time;
     }
 
 
@@ -50,7 +51,7 @@ export class Interface {
     fightText(time) {
         if (!this.fightTextShowed) {
             this.fightTextShowed = true;
-            this.textInfo.showText('FIGHT', time);
+            this.textInfo.showText('You angered the orcs!', time);
         }
     }
 

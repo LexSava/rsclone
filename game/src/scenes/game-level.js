@@ -8,6 +8,7 @@ import { Waves } from '../waves';
 import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
+// import { playAudio } from '../audio';
 
 export class GameLevel extends Scene {
   constructor(game) {
@@ -24,9 +25,12 @@ export class GameLevel extends Scene {
 
     isAgressive.becomePeaceful();//Сделать орков мирными
 
+    console.log('HI');
     this.player = new Player(this.game.control, this);
-    this.player.x = 100;
-    this.player.y = 100;
+    // this.player.x = 120;
+    // this.player.y = 20;
+    this.player.x = 990;
+    this.player.y = 1040;
 
     this.collider = new Collider();//Учитывает взаимодействие между объектами, например, не даёт проходить объектам сквозь друг друга
 
@@ -50,7 +54,6 @@ export class GameLevel extends Scene {
     this.waves = new Waves(this.game);//Контролирует появление противников
     this.waves.init();
 
-    // this.textInfo = new TextInfo(this.game.screen);//Выскакивающие текстовые надписи, например "Wave#1"
     this.interface = new Interface(this.game, this.waves);//Шкала здоровья, таймер в углу экрана
     this.projectiles = [];//Массив стрел, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
     this.gameOverTrigger = false;//Если interface сделает эту переменную true, переходим к проигрышной сцене
@@ -64,11 +67,10 @@ export class GameLevel extends Scene {
       this.finish(Scene.GAME_OVER);
     }
 
-    if (this.winTrigger) {//Закончим игру
-      this.finish(Scene.GAME_WIN);
-    }
+    // if (this.winTrigger) {//Закончим игру
+    //   this.finish(Scene.GAME_WIN);
+    // }
 
-    // this.orc.update(time);
     this.player.update(time);
 
     if (this.projectiles.length > 0) {
@@ -78,6 +80,7 @@ export class GameLevel extends Scene {
         }
         if (arrow.deleted) {
           this.projectiles = RemoveFromArray.remove(this.projectiles, index);
+
         }
       });
     }
@@ -86,7 +89,6 @@ export class GameLevel extends Scene {
 
       this.orcArmy.forEach(orc => {
         orc.update(time);
-
       });
 
     }
