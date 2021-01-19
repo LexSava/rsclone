@@ -4,7 +4,7 @@ import { Menu } from './scenes/menu';
 import { GameLevel } from './scenes/game-level';
 import { Scene } from './scene';
 import { ControlState } from './control-state';
-import { GameOver } from './scenes/game-over';//потомок класса Scene
+import { GameOver } from './scenes/game-over';
 
 export class Game {
   constructor({ width = 640, height = 640 } = {}) {
@@ -21,14 +21,13 @@ export class Game {
       tiles: 'img/tiles.png',
     });
 
-
     this.control = new ControlState();
 
     this.scenes = {
       loading: new Loading(this),
       menu: new Menu(this),
       gameLevel: new GameLevel(this),
-      gameOver: new GameOver(this)
+      gameOver: new GameOver(this),
     };
     this.currentScene = this.scenes.loading;
     this.currentScene.init();
