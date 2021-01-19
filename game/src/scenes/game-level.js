@@ -8,6 +8,7 @@ import { Waves } from '../waves';
 import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
+import { arrowPlayAudio } from '../audio-playback/arrow';
 
 export class GameLevel extends Scene {
   constructor(game) {
@@ -120,5 +121,7 @@ export class GameLevel extends Scene {
     this.player.addArrow(arrow);
     this.projectiles.push(arrow);// Все объекты из этого массива будут отрисованы в методе render
     this.collider.addKinematicBody(arrow);
+    setTimeout(() => arrowPlayAudio(), 500);
+
   }
 }
