@@ -8,6 +8,7 @@ import { Waves } from '../waves';
 import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
+import { arrowPlayAudio, gamePlayAudio, gameOverPlayAudio } from '../audio-playback/audios';
 
 export class GameLevel extends Scene {
   constructor(game) {
@@ -22,7 +23,6 @@ export class GameLevel extends Scene {
   init() {
     super.init();
     isAgressive.becomePeaceful();// Сделать орков мирными
-
     this.player = new Player(this.game.control, this);
     // this.player.x = 120;
     // this.player.y = 20;
@@ -55,10 +55,13 @@ export class GameLevel extends Scene {
     this.projectiles = [];// Массив стрел, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
     this.gameOverTrigger = false;// Если interface сделает эту переменную true, переходим к проигрышной сцене
     this.winTrigger = false;// Если interface сделает эту переменную true, переходим к победной сцене
+    gamePlayAudio(true);
   }
 
   update(time) {
     if (this.gameOverTrigger) { // Закончим игру
+      gamePlayAudio(false);
+      gameOverPlayAudio();
       this.finish(Scene.GAME_OVER);
     }
 
@@ -67,7 +70,6 @@ export class GameLevel extends Scene {
     // }
 
     this.player.update(time);
-
     if (this.projectiles.length > 0) {
       this.projectiles.forEach((arrow, index) => {
         if (arrow.active) { // active становится true в методе Player -> Body.shoot()
@@ -120,5 +122,6 @@ export class GameLevel extends Scene {
     this.player.addArrow(arrow);
     this.projectiles.push(arrow);// Все объекты из этого массива будут отрисованы в методе render
     this.collider.addKinematicBody(arrow);
+    setTimeout(() => arrowPlayAudio(), 500);
   }
 }
