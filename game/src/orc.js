@@ -3,6 +3,7 @@ import { Dummy } from './ais/dummy';
 import { EndScript } from './ais/endScript';
 import { Peaceful } from './ais/peaceful';
 import { isAgressive } from './ais/isAgressive';
+import { deathOrcPlayAudio } from './audio-playback/audios';
 
 export class Orc extends Body {
   constructor(player, aiType = 'peaceful') { // Передаём игрока, чтобы орк мог следить за ним и атаковать его
@@ -23,6 +24,7 @@ export class Orc extends Body {
   }
 
   death() {
+    deathOrcPlayAudio();
     this.ai = null;// Отключаем ИИ
     isAgressive.becomeAgressive();
     super.death();
