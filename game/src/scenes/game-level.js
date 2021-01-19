@@ -9,7 +9,7 @@ import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
 import { arrowPlayAudio, gamePlayAudio, gameOverPlayAudio } from '../audio-playback/audios';
-
+import { QuestPerson } from '../quest-person';
 export class GameLevel extends Scene {
   constructor(game) {
     super(game);
@@ -24,10 +24,14 @@ export class GameLevel extends Scene {
     super.init();
     isAgressive.becomePeaceful();// Сделать орков мирными
     this.player = new Player(this.game.control, this);
-    // this.player.x = 120;
-    // this.player.y = 20;
-    this.player.x = 990;
-    this.player.y = 1040;
+    this.player.x = 120;
+    this.player.y = 20;
+    // this.player.x = 990;
+    // this.player.y = 1040;
+
+    this.questPerson = new QuestPerson();
+    this.questPerson.x = 900;
+    this.questPerson.y = 60;
 
     this.collider = new Collider();// Учитывает взаимодействие между объектами, например, не даёт проходить объектам сквозь друг друга
 
@@ -86,7 +90,7 @@ export class GameLevel extends Scene {
         orc.update(time);
       });
     }
-
+    this.questPerson.update(time);
     this.collider.update(time);
     this.mainCamera.update(time);
   }
@@ -111,10 +115,10 @@ export class GameLevel extends Scene {
         }
       });
     }
-
+    this.game.screen.drawSprite(this.questPerson.view);
     this.waves.update(time);
-    super.render(time);
     this.interface.update(time);
+    super.render(time);
   }
 
   shooting() { // Стрельба игрока
