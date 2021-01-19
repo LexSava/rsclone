@@ -123,6 +123,5 @@ export class GameLevel extends Scene {
     this.projectiles.push(arrow);// Все объекты из этого массива будут отрисованы в методе render
     this.collider.addKinematicBody(arrow);
     setTimeout(() => arrowPlayAudio(), 500);
-
   }
 }

@@ -1,16 +1,12 @@
 import { Scene } from '../scene';
 
-
-
 export class Menu extends Scene {
   constructor(game) {
     super(game);
-
   }
 
   init() {
     super.init();
-
   }
 
   update(time) {
@@ -20,7 +16,6 @@ export class Menu extends Scene {
   }
 
   render(time) {
-
     this.update(time);
     this.game.screen.drawImage(0, 0, 'title_bg');
     this.game.screen.drawImage(0, 0, 'title_name');

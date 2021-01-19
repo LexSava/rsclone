@@ -1,7 +1,6 @@
 import { Body } from './body';
 import { swordPlayAudio } from './audio-playback/audios';
 
-
 export class Player extends Body { // Player -> Body ~ CharacterSheet -> SpriteSheet ~ Sprite
   constructor(control, game_level) { // control - управление клавиатурой
     super({ imageName: 'player', speed: 100 });

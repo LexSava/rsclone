@@ -16,10 +16,9 @@ export class GameOver extends Scene {
   }
 
   render(time) {
-
     this.update(time);
     this.game.screen.fill('#000000');
-    this.game.screen.print(50, 70, 'Game over! Click on Enter to start a "new game".');
+    this.game.screen.print(50, 70, 'Game over! Click on Enter to start a NEW GAME.');
     super.render(time);
   }
 }
