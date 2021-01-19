@@ -8,7 +8,7 @@ import { Waves } from '../waves';
 import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
-import { arrowPlayAudio } from '../audio-playback/audios';
+import { arrowPlayAudio, gamePlayAudio } from '../audio-playback/audios';
 
 export class GameLevel extends Scene {
   constructor(game) {
@@ -23,7 +23,7 @@ export class GameLevel extends Scene {
   init() {
     super.init();
     isAgressive.becomePeaceful();// Сделать орков мирными
-
+    gamePlayAudio();
     this.player = new Player(this.game.control, this);
     // this.player.x = 120;
     // this.player.y = 20;
