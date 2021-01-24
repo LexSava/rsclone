@@ -29,6 +29,7 @@ export function gameOverPlayAudio() {
 
 export function gamePlayAudio(state) {
   gameAudio.volume = 0.1;
+  gameAudio.loop = true;
   if (state == true) {
     gameAudio.play();
   } else {

@@ -1,5 +1,6 @@
 import { TextInfo } from './text-info';
 import { isAgressive } from './ais/isAgressive';
+import { allDeathOrks, showQuestInterface } from './get-quest';
 
 export class Interface {
   constructor(game, waves) {
@@ -10,7 +11,9 @@ export class Interface {
     this.lastTime = 0;
     this.player = game.currentScene.player;
     this.fightTextShowed = false;// надпись Fight покажется лишь один раз
-    this.timeToSurvive = 2000000;// Если это время выйдет в ноль, то игра закончится победой
+    //this.timeToSurvive = 2000000;// Если это время выйдет в ноль, то игра закончится победой
+
+    this.orcsKilled = 0;
 
     this.widthHealthLine = 150;
 
@@ -23,6 +26,10 @@ export class Interface {
     }
 
     this.showHealthLine();
+    if (showQuestInterface) {
+      this.questInterface();
+    }
+
 
     if (this.player.health === 0) {
       this.endGame(time, 'lose');// Проиграл
@@ -30,14 +37,15 @@ export class Interface {
 
     if (isAgressive.isOrcAgressive()) {
       this.fightText(time);
-    } else {
-      // this.showTimer();//Обратный отсчёт
-      this.timeToSurvive -= time - this.lastTime;
-      if (this.timeToSurvive < 0) {
-        this.timeToSurvive = 0;
-        this.endGame(time, 'win');
-      }
     }
+    // else {
+    //   this.showTimer();//Обратный отсчёт
+    //   this.timeToSurvive -= time - this.lastTime;
+    //   if (this.timeToSurvive < 0) {
+    //     this.timeToSurvive = 0;
+    //     this.endGame(time, 'win');
+    //   }
+    // }
 
     this.textInfo.update(time);
 
@@ -62,10 +70,16 @@ export class Interface {
   }
 
   // showTimer() {
-  //     this.game.screen.print(this.game.screen.width - 50, 30, //х, y
-  //         Math.floor(this.timeToSurvive / 1000),//'text'
-  //         22);//fontsize
+  //   this.game.screen.print(this.game.screen.width - 50, 30, //х, y
+  //     Math.floor(this.timeToSurvive / 1000),//'text'
+  //     22);//fontsize
   // }
+
+  questInterface() {
+    this.context.fillStyle = '#FFFFFF';
+    this.context.font = "20px serif"
+    this.context.fillText(`Orcs killed / ${allDeathOrks}`, 20, 60);
+  }
 
   endGame(time, status) {
     // Постепенно появляется черная заставка и сообщаем сцене, что игра закончена
