@@ -10,7 +10,7 @@ import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
 import { arrowPlayAudio, gamePlayAudio, gameOverPlayAudio } from '../audio-playback/audios';
 import { QuestPerson } from '../quest-person';
-import { getQuest } from '../get-quest';
+import { getQuest, allDeathOrks, updateQuest } from '../get-quest';
 
 
 export class GameLevel extends Scene {
@@ -70,9 +70,17 @@ export class GameLevel extends Scene {
   }
 
   update(time) {
+    if (allDeathOrks == 2) {
+      updateQuest();
+      gamePlayAudio(false);
+      this.finish(Scene.GAME_WIN);
+
+    }
+
     if (this.gameOverTrigger) { // Закончим игру
       gamePlayAudio(false);
       gameOverPlayAudio();
+      updateQuest();
       this.finish(Scene.GAME_OVER);
     }
 

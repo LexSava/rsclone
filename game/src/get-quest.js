@@ -1,6 +1,10 @@
 export let allDeathOrks = 0;
 export let showQuestInterface = false;
 
+export function updateQuest() {
+    allDeathOrks = 0;
+}
+
 export function getQuest() {
     console.log('YES!!!');
     showQuestInterface = true;
