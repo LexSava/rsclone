@@ -18,7 +18,7 @@ export class GameWin extends Scene {
     render(time) {
         this.update(time);
         this.game.screen.fill('#000000');
-        this.game.screen.print(50, 70, 'Game WIN! Click on Enter to start a NEW GAME.');
+        this.game.screen.print(50, 70, 'You WIN! Click on Enter to start a NEW GAME.');
         super.render(time);
     }
 }

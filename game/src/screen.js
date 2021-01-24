@@ -11,6 +11,18 @@ export class Screen {
     this.isImagesLoaded = false;
     this.camera = null;
     this.isCameraSet = false;
+    this.addStylesToCanvas();
+  }
+
+  addStylesToCanvas() {
+    this.canvas.style.display = 'block';
+    this.canvas.style.position = 'absolute';
+    this.canvas.style.left = '0';
+    this.canvas.style.right = '0';
+    this.canvas.style.top = '0';
+    this.canvas.style.bottom = '0';
+    this.canvas.style.margin = 'auto';
+    document.body.style.background = '#FFFFFF';
   }
 
   setCamera(camera) {
@@ -106,9 +118,9 @@ export class Screen {
 
     if (
       (spriteX >= this.width)
-            || (spriteY >= this.height)
-            || ((spriteX + sprite.width) <= 0)
-            || ((spriteY + sprite.height) <= 0)
+      || (spriteY >= this.height)
+      || ((spriteX + sprite.width) <= 0)
+      || ((spriteY + sprite.height) <= 0)
     ) {
       return;
     }
