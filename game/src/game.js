@@ -20,7 +20,7 @@ export class Game {
       title_option: 'img/option_game.png',
       title_exit: 'img/exit_game.png',
       tiles: 'img/tiles.png',
-      quest_person: 'img/girl-for-cave.png'
+      quest_person: 'img/girl-for-cave.png',
     });
 
     this.control = new ControlState();

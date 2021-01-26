@@ -8,12 +8,13 @@ import { Waves } from '../waves';
 import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
-import { arrowPlayAudio, gamePlayAudio, gameOverPlayAudio, gameWinPlayAudio } from '../audio-playback/audios';
+import {
+  arrowPlayAudio, gamePlayAudio, gameOverPlayAudio, gameWinPlayAudio,
+} from '../audio-playback/audios';
 import { QuestPerson } from '../quest-person';
 import { showModalDialog } from '../modal-dialogue';
 import { showTraining } from '../training';
 import { allDeathOrks, updateQuest } from '../get-quest';
-
 
 export class GameLevel extends Scene {
   constructor(game) {
@@ -67,7 +68,6 @@ export class GameLevel extends Scene {
     this.projectiles = [];// Массив стрел, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
     this.gameOverTrigger = false;// Если interface сделает эту переменную true, переходим к проигрышной сцене
     this.winTrigger = false;// Если interface сделает эту переменную true, переходим к победной сцене
-    //updateModalDialog();
     showTraining();
     gameWinPlayAudio(false);
     gamePlayAudio(true);
@@ -88,8 +88,6 @@ export class GameLevel extends Scene {
       this.finish(Scene.GAME_OVER);
     }
 
-
-
     this.player.update(time);
     if (this.projectiles.length > 0) {
       this.projectiles.forEach((arrow, index) => {
@@ -107,9 +105,8 @@ export class GameLevel extends Scene {
         orc.update(time);
       });
     }
-    //console.log(this.player.x, this.player.y);
+    // console.log(this.player.x, this.player.y);
     // console.log(this.questPerson.x, this.questPerson.y);
-
 
     this.questPerson.update(time);
     this.collider.update(time);
@@ -137,17 +134,13 @@ export class GameLevel extends Scene {
       });
     }
 
-
     this.game.screen.drawSprite(this.questPerson.view);
     this.waves.update(time);
     this.interface.update(time);
     super.render(time);
 
-
     if (this.player.x >= 870 && this.player.x <= 970 && this.player.y >= 100 && this.player.y <= 130) {
       showModalDialog();
-      //setTimeout(() => showModalDialog(), 500);
-      //getQuest();
     }
   }
 

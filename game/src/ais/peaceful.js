@@ -1,7 +1,6 @@
 import { AI } from '../ai';
 import { isAgressive } from './isAgressive';
 
-
 export class Peaceful extends AI {
   constructor(player) { // Здесь хранятся все параметры, например, какие задачи у персонажа, его память, что делает прямо сейчас и т.д.
     super();
@@ -64,7 +63,7 @@ export class Peaceful extends AI {
     if (this.body.x + this.body.collisionShape.x - correction < this.player.x + this.player.collisionShape.x + this.player.collisionShape.width
       && this.body.x + this.body.collisionShape.x + this.body.collisionShape.width + correction > this.player.x + this.player.collisionShape.x
       && this.body.y + this.body.collisionShape.y - correction < this.player.y + this.player.collisionShape.y + this.player.collisionShape.height
-      && this.body.y + this.body.collisionShape.y + this.body.collisionShape.height + correction > this.player.y + this.player.collisionShape.y) { this.attack();}
+      && this.body.y + this.body.collisionShape.y + this.body.collisionShape.height + correction > this.player.y + this.player.collisionShape.y) { this.attack(); }
     // }
     if ((time - this.lastTimeAgressive) > this.durationAgressive) {
       this.changeAgressiveDirection();
