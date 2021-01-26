@@ -3,6 +3,7 @@ export let showQuestInterface = false;
 
 export function updateQuest() {
     allDeathOrks = 0;
+    showQuestInterface = false;
 }
 
 export function getQuest() {

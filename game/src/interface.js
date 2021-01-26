@@ -78,7 +78,7 @@ export class Interface {
   questInterface() {
     this.context.fillStyle = '#FFFFFF';
     this.context.font = "20px serif"
-    this.context.fillText(`Orcs killed / ${allDeathOrks}`, 20, 60);
+    this.context.fillText(`Orcs killed - ${allDeathOrks} of 10`, 20, 60);
   }
 
   endGame(time, status) {
