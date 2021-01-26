@@ -5,6 +5,7 @@ import { GameLevel } from './scenes/game-level';
 import { Scene } from './scene';
 import { ControlState } from './control-state';
 import { GameOver } from './scenes/game-over';
+import { GameWin } from './scenes/game-win';
 
 export class Game {
   constructor({ width = 640, height = 640 } = {}) {
@@ -19,6 +20,7 @@ export class Game {
       title_option: 'img/option_game.png',
       title_exit: 'img/exit_game.png',
       tiles: 'img/tiles.png',
+      quest_person: 'img/girl-for-cave.png'
     });
 
     this.control = new ControlState();
@@ -28,6 +30,7 @@ export class Game {
       menu: new Menu(this),
       gameLevel: new GameLevel(this),
       gameOver: new GameOver(this),
+      gameWin: new GameWin(this),
     };
     this.currentScene = this.scenes.loading;
     this.currentScene.init();
@@ -41,6 +44,8 @@ export class Game {
         return this.scenes.gameLevel;
       case Scene.GAME_OVER:
         return this.scenes.gameOver;
+      case Scene.GAME_WIN:
+        return this.scenes.gameWin;
       default:
         return this.scenes.menu;
     }
