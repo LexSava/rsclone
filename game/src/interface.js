@@ -11,7 +11,6 @@ export class Interface {
     this.lastTime = 0;
     this.player = game.currentScene.player;
     this.fightTextShowed = false;// надпись Fight покажется лишь один раз
-    //this.timeToSurvive = 2000000;// Если это время выйдет в ноль, то игра закончится победой
 
     this.orcsKilled = 0;
 
@@ -30,7 +29,6 @@ export class Interface {
       this.questInterface();
     }
 
-
     if (this.player.health === 0) {
       this.endGame(time, 'lose');// Проиграл
     }
@@ -38,14 +36,6 @@ export class Interface {
     if (isAgressive.isOrcAgressive()) {
       this.fightText(time);
     }
-    // else {
-    //   this.showTimer();//Обратный отсчёт
-    //   this.timeToSurvive -= time - this.lastTime;
-    //   if (this.timeToSurvive < 0) {
-    //     this.timeToSurvive = 0;
-    //     this.endGame(time, 'win');
-    //   }
-    // }
 
     this.textInfo.update(time);
 
@@ -69,15 +59,9 @@ export class Interface {
     this.context.stroke();
   }
 
-  // showTimer() {
-  //   this.game.screen.print(this.game.screen.width - 50, 30, //х, y
-  //     Math.floor(this.timeToSurvive / 1000),//'text'
-  //     22);//fontsize
-  // }
-
   questInterface() {
     this.context.fillStyle = '#FFFFFF';
-    this.context.font = "20px serif"
+    this.context.font = '20px serif';
     this.context.fillText(`Orcs killed - ${allDeathOrks} of 10`, 20, 60);
   }
 

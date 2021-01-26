@@ -1,19 +1,19 @@
 import { Scene } from '../scene';
 
 export class GameWin extends Scene {
-    constructor(game) {
-        super(game);
-    }
+  constructor(game) {
+    super(game);
+  }
 
-    init() {
-        super.init();
-    }
+  init() {
+    super.init();
+  }
 
-    update(time) {
-        if (this.game.control.enter) { // При нажатии на "enter" начать новую игру
-            this.finish(Scene.START_GAME);
-        }
+  update(time) {
+    if (this.game.control.enter) { // При нажатии на "enter" начать новую игру
+      this.finish(Scene.START_GAME);
     }
+  }
 
     render(time) {
         this.update(time);
