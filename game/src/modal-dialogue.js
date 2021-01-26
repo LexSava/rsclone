@@ -1,6 +1,4 @@
 import { getQuest, updateQuest } from './get-quest';
-
-const BODY = document.createElement('body');
 const TAKE_QUEST = document.getElementById("take_quest");
 const ADANDON_THE_QUEST = document.getElementById("abandon_the_quest");
 export let runOnceQuest = false;
@@ -23,5 +21,9 @@ ADANDON_THE_QUEST.onclick = function () {
 export function showModalDialog() {
     $('#staticBackdrop').modal('show');
     // $('#staticBackdrop').modal('handleUpdate');
+}
+
+export function updateModalDialog() {
+    $('#staticBackdrop').modal('handleUpdate');
 }
 

@@ -10,7 +10,8 @@ import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
 import { arrowPlayAudio, gamePlayAudio, gameOverPlayAudio, gameWinPlayAudio } from '../audio-playback/audios';
 import { QuestPerson } from '../quest-person';
-import { showModalDialog, runOnceQuest } from '../modal-dialogue';
+import { showModalDialog } from '../modal-dialogue';
+import { showTraining } from '../training';
 import { allDeathOrks, updateQuest } from '../get-quest';
 
 
@@ -66,12 +67,14 @@ export class GameLevel extends Scene {
     this.projectiles = [];// Массив стрел, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
     this.gameOverTrigger = false;// Если interface сделает эту переменную true, переходим к проигрышной сцене
     this.winTrigger = false;// Если interface сделает эту переменную true, переходим к победной сцене
+    //updateModalDialog();
+    showTraining();
     gameWinPlayAudio(false);
     gamePlayAudio(true);
   }
 
   update(time) {
-    if (allDeathOrks == 2) {
+    if (allDeathOrks == 10) {
       gamePlayAudio(false);
       gameWinPlayAudio(true);
       updateQuest();
