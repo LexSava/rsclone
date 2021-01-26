@@ -8,10 +8,10 @@ import { Waves } from '../waves';
 import { Interface } from '../interface';
 import { RemoveFromArray } from '../remove-from-array';
 import { isAgressive } from '../ais/isAgressive';
-import { arrowPlayAudio, gamePlayAudio, gameOverPlayAudio } from '../audio-playback/audios';
+import { arrowPlayAudio, gamePlayAudio, gameOverPlayAudio, gameWinPlayAudio } from '../audio-playback/audios';
 import { QuestPerson } from '../quest-person';
 import { showModalDialog, runOnceQuest } from '../modal-dialogue';
-import { getQuest, allDeathOrks, updateQuest } from '../get-quest';
+import { allDeathOrks, updateQuest } from '../get-quest';
 
 
 export class GameLevel extends Scene {
@@ -66,13 +66,15 @@ export class GameLevel extends Scene {
     this.projectiles = [];// Массив стрел, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
     this.gameOverTrigger = false;// Если interface сделает эту переменную true, переходим к проигрышной сцене
     this.winTrigger = false;// Если interface сделает эту переменную true, переходим к победной сцене
+    gameWinPlayAudio(false);
     gamePlayAudio(true);
   }
 
   update(time) {
-    if (allDeathOrks == 10) {
-      updateQuest();
+    if (allDeathOrks == 2) {
       gamePlayAudio(false);
+      gameWinPlayAudio(true);
+      updateQuest();
       this.finish(Scene.GAME_WIN);
     }
 
@@ -139,8 +141,9 @@ export class GameLevel extends Scene {
     super.render(time);
 
 
-    if (this.player.x >= 870 && this.player.x <= 970 && this.player.y >= 100 && this.player.y <= 130 && !runOnceQuest) {
+    if (this.player.x >= 870 && this.player.x <= 970 && this.player.y >= 100 && this.player.y <= 130) {
       showModalDialog();
+      //setTimeout(() => showModalDialog(), 500);
       //getQuest();
     }
   }

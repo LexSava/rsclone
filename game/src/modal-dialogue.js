@@ -13,13 +13,15 @@ TAKE_QUEST.onclick = function () {
 };
 ADANDON_THE_QUEST.onclick = function () {
     console.log('Abandon the quest!');
+   
     $('#staticBackdrop').modal('hide');
+    
     runOnceQuest = false;
-    updateQuest();
-
+    // updateQuest();
 };
 
 export function showModalDialog() {
     $('#staticBackdrop').modal('show');
+    // $('#staticBackdrop').modal('handleUpdate');
 }
 
