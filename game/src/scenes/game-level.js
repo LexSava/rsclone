@@ -30,8 +30,8 @@ export class GameLevel extends Scene {
     isAgressive.becomePeaceful();// Сделать орков мирными
     this.player = new Player(this.game.control, this);
 
-    this.player.x = 500;
-    this.player.y = 20;
+    this.player.x = 224;
+    this.player.y = 118;
 
     // this.player.x = 990;
     // this.player.y = 1040;
@@ -61,6 +61,7 @@ export class GameLevel extends Scene {
 
     this.orcArmy = [];// Массив орков, новые стрелы будут добавляться сюда, а метод render будет отрисовывать все объекты из этого массива
     this.waves = new Waves(this.game);// Контролирует появление противников
+    
     this.waves.init();
 
     this.interface = new Interface(this.game, this.waves);// Шкала здоровья, таймер в углу экрана

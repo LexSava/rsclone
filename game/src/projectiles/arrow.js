@@ -11,10 +11,10 @@ export class Arrow extends Projectile {
       imageWidth: 640,
       imageHeight: 640,
     });
-    this.sprites.left = tiles.getSprite(36);
-    this.sprites.right = tiles.getSprite(37);
-    this.sprites.down = tiles.getSprite(46);
-    this.sprites.up = tiles.getSprite(47);
+    this.sprites.left = tiles.getSprite(9);
+    this.sprites.right = tiles.getSprite(10);
+    this.sprites.down = tiles.getSprite(19);
+    this.sprites.up = tiles.getSprite(20);
     this.view = this.sprites[direction];
   }
 

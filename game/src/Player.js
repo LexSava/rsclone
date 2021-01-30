@@ -3,7 +3,7 @@ import { swordPlayAudio } from './audio-playback/audios';
 
 export class Player extends Body { // Player -> Body ~ CharacterSheet -> SpriteSheet ~ Sprite
   constructor(control, game_level) { // control - управление клавиатурой
-    super({ imageName: 'player', speed: 100 });
+    super({ imageName: 'player', speed: 500 });
     this.control = control;
     this.game_level = game_level;
     this.arrow = false;// Позволяем стрелять только если на руках есть стрела
