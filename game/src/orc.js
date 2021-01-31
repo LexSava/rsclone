@@ -15,7 +15,6 @@ export class Orc extends Body {
     if (aiType == 'peaceful') this.ai = new Peaceful(player);
 
     this.allDeathOrks = 0;
-
     this.name = 'orc';// Для коллайдера, что опознать этот объект
     this.ai.control(this);
   }

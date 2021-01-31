@@ -19,7 +19,10 @@ export class Game {
       title_start: 'img/start_game.png',
       title_option: 'img/option_game.png',
       title_exit: 'img/exit_game.png',
+      you_win: 'img/you_win.png',
+      game_over: 'img/game_over.png',
       tiles: 'img/tiles.png',
+      tiles2: 'img/tiles2.png',
       quest_person: 'img/girl-for-cave.png'
     });
 
