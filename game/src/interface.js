@@ -1,6 +1,6 @@
 import { TextInfo } from './text-info';
 import { isAgressive } from './ais/isAgressive';
-import { allDeathOrks, showQuestInterface } from './get-quest';
+import { allDeathOrks, showQuestInterface, showPassageDungeon } from './get-quest';
 
 export class Interface {
   constructor(game, waves) {
@@ -28,6 +28,9 @@ export class Interface {
     this.showHealthLine();
     if (showQuestInterface) {
       this.questInterface();
+    }
+    if (showPassageDungeon) {
+      this.passageDungeon();
     }
 
     if (this.player.health === 0) {
@@ -64,6 +67,12 @@ export class Interface {
     this.context.fillStyle = '#FFFFFF';
     this.context.font = '20px serif';
     this.context.fillText(`Orcs killed - ${allDeathOrks} of 10`, 20, 60);
+  }
+
+  passageDungeon() {
+    this.context.fillStyle = '#FFFFFF';
+    this.context.font = '20px serif';
+    this.context.fillText('The dungeon is open!', 20, 60);
   }
 
   endGame(time, status) {

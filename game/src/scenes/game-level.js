@@ -15,7 +15,7 @@ import { QuestPerson } from '../quest-person';
 import { showModalDialog, runOnceQuest } from '../modal-dialogue';
 import { showTraining } from '../training';
 import { nextLevelInfo } from '../newLevel';
-import { allDeathOrks, updateQuest } from '../get-quest';
+import { allDeathOrks, updateQuest, questСompleted } from '../get-quest';
 
 export class GameLevel extends Scene {
   constructor(game) {
@@ -41,7 +41,7 @@ export class GameLevel extends Scene {
 
     this.questPerson = new QuestPerson();
     this.questPerson.x = 940;
-    this.questPerson.y = 100;
+    this.questPerson.y = 90;
 
     this.collider = new Collider();// Учитывает взаимодействие между объектами, например, не даёт проходить объектам сквозь друг друга
 
@@ -102,8 +102,6 @@ export class GameLevel extends Scene {
         orc.update(time);
       });
     }
-    // console.log(this.player.x, this.player.y);
-    // console.log(this.questPerson.x, this.questPerson.y);
 
     this.questPerson.update(time);
     this.collider.update(time);
@@ -136,12 +134,10 @@ export class GameLevel extends Scene {
     this.interface.update(time);
     super.render(time);
 
-    if (this.player.x >= 870 && this.player.x <= 970 && this.player.y >= 100 && this.player.y <= 130) {
+    if (this.player.x >= 870 && this.player.x <= 1070 && this.player.y >= 100 && this.player.y <= 130) {
       if (runOnceQuest == false) {
         showModalDialog();
       }
-
-
     }
 
     // go to next level for map
