@@ -23,7 +23,7 @@ export class Game {
       game_over: 'img/game_over.png',
       tiles: 'img/tiles.png',
       tiles2: 'img/tiles2.png',
-      quest_person: 'img/girl-for-cave.png'
+      quest_person: 'img/girl-for-cave.png',
     });
 
     this.control = new ControlState();

@@ -10,8 +10,7 @@ export class Collider {
     data.layers.forEach((layer) => {
       if (layer.type == 'objectgroup')
       /* objects это массив с набором объектов [{...},{...}, и т.д.]0
-                Думаю, конструкция (...layer.objects) создает массив  this.staticShapes = [{...},{...}, и т.д.] */
-      { this.staticShapes.push(...layer.objects); }
+                Думаю, конструкция (...layer.objects) создает массив  this.staticShapes = [{...},{...}, и т.д.] */ { this.staticShapes.push(...layer.objects); }
     });
     // Добавим ограничение по краям карты. За карту нельзя выйти
     this.staticShapes.push({
@@ -20,7 +19,7 @@ export class Collider {
     this.staticShapes.push({
       x: 0, y: 0, width: 1, height: 1300,
     });
-    // this.staticShapes.push({x:1280,y:0,width:1,height:1300});
+    // this.staticShapes.push({x:1280,y:0,width:1,height:1300}); - Ессли введены эти параметры Орки не могут пройти на карту.
     this.staticShapes.push({
       x: 1280, y: 0, width: 1300, height: 1,
     });
@@ -49,24 +48,24 @@ export class Collider {
         this.staticShapes.forEach((shape) => {
           if ( // Если старые координаты находятся перед объектом***
             ((oldX // координата персонажа
-                            - 1// Перемещение между кадрами занимает дробную часть пикселя, чтобы код работал округлим прошлую точку на 1 пиксель
-                            + body.obj.collisionShape.x // координата формы коллизии внутри персонажа (началом отсчёта служит левый верхний угол персонажа)
-                            + body.obj.collisionShape.width) < shape.x)
-                        //* **и новые координаты находятся после объекта, значит персонаж столкнулся с препятствием
-                        && ((x
-                            + body.obj.collisionShape.x
-                            + body.obj.collisionShape.width) > shape.x)
+              - 1// Перемещение между кадрами занимает дробную часть пикселя, чтобы код работал округлим прошлую точку на 1 пиксель
+              + body.obj.collisionShape.x // координата формы коллизии внутри персонажа (началом отсчёта служит левый верхний угол персонажа)
+              + body.obj.collisionShape.width) < shape.x)
+            //* **и новые координаты находятся после объекта, значит персонаж столкнулся с препятствием
+            && ((x
+              + body.obj.collisionShape.x
+              + body.obj.collisionShape.width) > shape.x)
 
-                        // Персонаж должен касаться препятствия
-                        && ((y
-                            + body.obj.collisionShape.y) < (shape.y + shape.height))
+            // Персонаж должен касаться препятствия
+            && ((y
+              + body.obj.collisionShape.y) < (shape.y + shape.height))
 
-                        && ((y
-                            + body.obj.collisionShape.y
-                            + body.obj.collisionShape.height) > shape.y)
+            && ((y
+              + body.obj.collisionShape.y
+              + body.obj.collisionShape.height) > shape.y)
           ) { // Берем ближайший объект, где остановим персонажа
             x = Math.min(x + body.obj.collisionShape.x + body.obj.collisionShape.width, shape.x)// (наверное можно было просто оставить один shape.x)
-                            - body.obj.collisionShape.x - body.obj.collisionShape.width;
+              - body.obj.collisionShape.x - body.obj.collisionShape.width;
             this.checkInteractiveWithStatic(body, i);// Проверяем интерактив со статичными объектами (например после попадания в дерево, стрела не движется)
           }
         });
@@ -76,12 +75,12 @@ export class Collider {
           const shape = this.bodies[j];
           if (body != shape) { // Если это не тот же самый объект
             if (((oldX - 1 + body.obj.collisionShape.x + body.obj.collisionShape.width) < shape.obj.x + shape.obj.collisionShape.x)
-                            && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x)
-                            && ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height))
-                            && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
+              && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x)
+              && ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height))
+              && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
             ) {
               x = Math.min(x + body.obj.collisionShape.x + body.obj.collisionShape.width, shape.obj.x + shape.obj.collisionShape.x)
-                                - body.obj.collisionShape.x - body.obj.collisionShape.width;
+                - body.obj.collisionShape.x - body.obj.collisionShape.width;
               this.checkInteractive(body, shape, i, j);// Проверяем интерактив (например стрела бьёт орка, орк бьёт игрока и т.д.)
             }
           }
@@ -91,9 +90,9 @@ export class Collider {
       if (x < oldX) { // moving left
         this.staticShapes.forEach((shape) => {
           if (((oldX + 1 + body.obj.collisionShape.x) > (shape.x + shape.width))
-                        && ((x + body.obj.collisionShape.x) < (shape.x + shape.width))
-                        && ((y + body.obj.collisionShape.y) < (shape.y + shape.height))
-                        && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.y)
+            && ((x + body.obj.collisionShape.x) < (shape.x + shape.width))
+            && ((y + body.obj.collisionShape.y) < (shape.y + shape.height))
+            && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.y)
           ) {
             x = Math.max(x + body.obj.collisionShape.x, shape.x + shape.width) - body.obj.collisionShape.x;
             this.checkInteractiveWithStatic(body, i);
@@ -105,9 +104,9 @@ export class Collider {
           const shape = this.bodies[j];
           if (body != shape) { // Если это не тот же самый объект
             if (((oldX + 1 + body.obj.collisionShape.x) > shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)
-                            && ((x + body.obj.collisionShape.x) < shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)
-                            && ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height))
-                            && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
+              && ((x + body.obj.collisionShape.x) < shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width)
+              && ((y + body.obj.collisionShape.y) < (shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height))
+              && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
             ) {
               x = Math.max(x + body.obj.collisionShape.x, shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width) - body.obj.collisionShape.x;
               this.checkInteractive(body, shape, i, j);
@@ -119,9 +118,9 @@ export class Collider {
       if (y > oldY) { // moving down
         this.staticShapes.forEach((shape) => {
           if (((oldY - 1 + body.obj.collisionShape.y + body.obj.collisionShape.height) < shape.y)
-                        && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.y)
-                        && ((x + body.obj.collisionShape.x) < (shape.x + shape.width))
-                        && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.x)
+            && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.y)
+            && ((x + body.obj.collisionShape.x) < (shape.x + shape.width))
+            && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.x)
           ) {
             y = Math.min(y + body.obj.collisionShape.y + body.obj.collisionShape.height, shape.y) - body.obj.collisionShape.y - body.obj.collisionShape.height;
             this.checkInteractiveWithStatic(body, i);
@@ -133,12 +132,12 @@ export class Collider {
           const shape = this.bodies[j];
           if (body != shape) { // Если это не тот же самый объект
             if (((oldY - 1 + body.obj.collisionShape.y + body.obj.collisionShape.height) < shape.obj.y + shape.obj.collisionShape.y)
-                            && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
-                            && ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width))
-                            && ((x + body.obj.collisionShape.x + body.obj.collisionShape.height) > shape.obj.x + shape.obj.collisionShape.x)
+              && ((y + body.obj.collisionShape.y + body.obj.collisionShape.height) > shape.obj.y + shape.obj.collisionShape.y)
+              && ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width))
+              && ((x + body.obj.collisionShape.x + body.obj.collisionShape.height) > shape.obj.x + shape.obj.collisionShape.x)
             ) {
               y = Math.min(y + body.obj.collisionShape.y + body.obj.collisionShape.height, shape.obj.y + shape.obj.collisionShape.y)
-                                - body.obj.collisionShape.y - body.obj.collisionShape.height;
+                - body.obj.collisionShape.y - body.obj.collisionShape.height;
               this.checkInteractive(body, shape, i, j);
             }
           }
@@ -148,9 +147,9 @@ export class Collider {
       if (y < oldY) { // moving up
         this.staticShapes.forEach((shape) => {
           if (((oldY + 1 + body.obj.collisionShape.y) > (shape.y + shape.height))
-                        && ((y + body.obj.collisionShape.y) < (shape.y + shape.height))
-                        && ((x + body.obj.collisionShape.x) < (shape.x + shape.width))
-                        && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.x)
+            && ((y + body.obj.collisionShape.y) < (shape.y + shape.height))
+            && ((x + body.obj.collisionShape.x) < (shape.x + shape.width))
+            && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.x)
           ) {
             y = Math.max(y + body.obj.collisionShape.y, shape.y + shape.height) - body.obj.collisionShape.y;
             this.checkInteractiveWithStatic(body, i);
@@ -161,9 +160,9 @@ export class Collider {
           const shape = this.bodies[j];
           if (body != shape) { // Если это не тот же самый объект
             if (((oldY + 1 + body.obj.collisionShape.y) > shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)
-                            && ((y + body.obj.collisionShape.y) < shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)
-                            && ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width))
-                            && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x)
+              && ((y + body.obj.collisionShape.y) < shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height)
+              && ((x + body.obj.collisionShape.x) < (shape.obj.x + shape.obj.collisionShape.x + shape.obj.collisionShape.width))
+              && ((x + body.obj.collisionShape.x + body.obj.collisionShape.width) > shape.obj.x + shape.obj.collisionShape.x)
             ) {
               y = Math.max(y + body.obj.collisionShape.y, shape.obj.y + shape.obj.collisionShape.y + shape.obj.collisionShape.height) - body.obj.collisionShape.y;
               this.checkInteractive(body, shape, i, j);

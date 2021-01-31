@@ -6,7 +6,6 @@ import { isAgressive } from './ais/isAgressive';
 import { deathOrcPlayAudio } from './audio-playback/audios';
 import { deathOrcs } from './get-quest';
 
-
 export class Orc extends Body {
   constructor(player, aiType = 'peaceful') { // Передаём игрока, чтобы орк мог следить за ним и атаковать его
     super({ imageName: 'orc', speed: 50 });
@@ -25,7 +24,6 @@ export class Orc extends Body {
     }
     super.update(time);
   }
-
 
   death() {
     deathOrcs();
