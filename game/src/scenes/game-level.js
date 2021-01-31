@@ -17,7 +17,6 @@ import { showTraining } from '../training';
 import { nextLevelInfo } from '../newLevel';
 import { allDeathOrks, updateQuest } from '../get-quest';
 
-
 export class GameLevel extends Scene {
   constructor(game) {
     super(game);
