@@ -15,10 +15,10 @@ export class GameWin extends Scene {
     }
   }
 
-    render(time) {
-        this.update(time);
-        this.game.screen.drawImage(0, 0, 'title_bg');
-        this.game.screen.drawImage(0, 0, 'you_win');
-        super.render(time);
-    }
+  render(time) {
+    this.update(time);
+    this.game.screen.drawImage(0, 0, 'title_bg');
+    this.game.screen.drawImage(0, 0, 'you_win');
+    super.render(time);
+  }
 }

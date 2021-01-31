@@ -7,11 +7,13 @@ export function updateQuest() {
 }
 
 export function getQuest() {
+  console.log('YES!!!');
   showQuestInterface = true;
 }
 
 export function deathOrcs() {
   if (showQuestInterface) {
     allDeathOrks++;
+    console.log(allDeathOrks);
   }
 }

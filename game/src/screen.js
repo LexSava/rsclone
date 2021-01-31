@@ -35,6 +35,7 @@ export class Screen {
     loader.load().then((names) => {
       this.images = Object.assign(this.images, loader.images);
       this.isImagesLoaded = true;
+      console.log(names);
     });
   }
 

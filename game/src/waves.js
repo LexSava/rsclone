@@ -28,11 +28,11 @@ export class Waves {
   }
 
   nextWave(time) {
-    let orcSquad = [];// Создать за один раз нескольких орков
+    const orcSquad = [];// Создать за один раз нескольких орков
     for (let i = 0; i < 2; i++) {
-      let orc = new Orc(this.player);// Передаём игрока, чтобы орк мог следить за ним и атаковать его
+      const orc = new Orc(this.player);// Передаём игрока, чтобы орк мог следить за ним и атаковать его
       orc.x = 1246;// После отладки сделай 1350
-      orc.y = 1130;
+      orc.y = 1030 + i * 70;
       orcSquad.push(orc);
     }
     orcSquad.forEach((orc) => {
